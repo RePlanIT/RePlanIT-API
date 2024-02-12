@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  replanit_api:
+      build: .
+      container_name: replanit_api
+      volumes:
+        - .:/app
+      command: python -m gunicorn --bind 0.0.0.0:5052 api:app
+      restart: always
+      ports:
+        - "5052:5052"
+networks:
+  default:
+    external:
+      name: graphdb-docker
